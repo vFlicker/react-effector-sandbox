@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "lib": ["dom", "esnext"],
+    "jsx": "react",
+    "noEmit": true,
+    "isolatedModules": true,
+    "baseUrl": ".",
+
+    /* Strict Type-Checking Options */
+    "strict": true,
+
+    /* Module Resolution Options */
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    /* Advanced Options */
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
