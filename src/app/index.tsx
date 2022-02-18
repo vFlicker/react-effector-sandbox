@@ -1,9 +1,10 @@
 import React from 'react';
+import { Input } from '@/shared/ui';
 
 export function App(): JSX.Element {
   return (
-    <div>
-      <h1>My app!</h1>
-    </div>
+    <form>
+      <Input />
+    </form>
   );
 }

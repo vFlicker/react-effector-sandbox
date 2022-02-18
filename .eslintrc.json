@@ -13,11 +13,19 @@
     "airbnb",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:effector/recommended",
+    "plugin:effector/scope",
+    "@feature-sliced/eslint-config/rules/import-order",
+    "@feature-sliced/eslint-config/rules/public-api",
+    "@feature-sliced/eslint-config/rules/layers-slices"
   ],
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "effector"],
   "settings": {
     "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      },
       "webpack": {
         "config": "webpack.config.ts"
       }

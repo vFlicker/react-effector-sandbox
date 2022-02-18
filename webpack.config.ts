@@ -40,7 +40,8 @@ const config: Configuration = {
     }),
   ],
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
+    alias: { '@': path.resolve(__dirname, 'src/') },
+    extensions: ['.tsx', '.ts', '.js'],
   },
   devServer: {
     static: path.resolve(__dirname, 'public'),

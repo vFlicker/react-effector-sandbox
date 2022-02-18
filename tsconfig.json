@@ -5,7 +5,12 @@
     "jsx": "react",
     "noEmit": true,
     "isolatedModules": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
 
     /* Strict Type-Checking Options */
     "strict": true,
@@ -16,7 +21,7 @@
     "esModuleInterop": true,
 
     /* Advanced Options */
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
   "exclude": [
     "node_modules",
