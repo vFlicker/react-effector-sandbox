@@ -1,9 +1,10 @@
 import { TodoItem } from '../types';
 
-const id = 1;
+let id = 1;
 
 export const createTodoItem = (label: string): TodoItem => ({
-  id: id + 1,
+  // eslint-disable-next-line no-plusplus
+  id: id++,
   label,
   important: false,
   done: false,

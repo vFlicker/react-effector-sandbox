@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { AddTodo, SearchTodo, TodoFilters } from '@/features';
-import { FilterType } from '@/features/todo-filters';
+import { FilterType, todoFiltersModel } from '@/features/todo-filters';
 
 import {
   TodoList,
@@ -14,9 +14,9 @@ import './styles.css';
 
 const getFilteredTodo = (todoList: todoTypes.TodoList, filterType: string) => {
   switch (filterType) {
-    case FilterType.DONE:
+    case FilterType.Done:
       return todoList.filter((todo) => todo.done);
-    case FilterType.ACTIVE:
+    case FilterType.Active:
       return todoList.filter((todo) => !todo.done);
     default:
       return todoList;
@@ -35,7 +35,7 @@ const getSearchedTodo = (todoList: todoTypes.TodoList, searchText: string) => {
 
 export function TodoApp(): JSX.Element {
   const [searchText, setSearchText] = useState('');
-  const [currentFilter, setCurrentFilter] = useState(FilterType.ALL);
+  const currentFilter = todoFiltersModel.selectors.useCurrentFilter();
 
   const todoList = todoModel.selectors.useTodoList();
 
@@ -56,10 +56,7 @@ export function TodoApp(): JSX.Element {
       <Header todo={todoCount} done={doneCount} />
       <div className="search-panel d-flex">
         <SearchTodo onSearchChange={handleSearchChange} />
-        <TodoFilters
-          onFilterChange={() => setCurrentFilter}
-          filter={currentFilter}
-        />
+        <TodoFilters />
       </div>
       <TodoList todoList={visibleItems} />
       <AddTodo />
