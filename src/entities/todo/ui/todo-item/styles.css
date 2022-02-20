@@ -1,5 +1,11 @@
-.todo-list-item {
+.todo-item {
+  display: flex;
+
   font-size: 1.25rem;
+}
+
+.buttons-wrapper {
+  margin-left: auto;
 }
 
 .todo-item button {

@@ -35,29 +35,31 @@ export function TodoItem({
     <span className={classNames}>
       <span className="todo-item-label">{label}</span>
 
-      <button
-        type="button"
-        className="btn btn-outline-success btn-sm float-right"
-        onClick={onToggleImportantClick}
-      >
-        <i className="fa fa-exclamation" />
-      </button>
+      <div className="buttons-wrapper">
+        <button
+          type="button"
+          className="btn btn-outline-success btn-sm"
+          onClick={onToggleImportantClick}
+        >
+          <i className="fa fa-check" />
+        </button>
 
-      <button
-        type="button"
-        className="btn btn-outline-danger btn-sm float-right"
-        onClick={onDeleteClick}
-      >
-        <i className="fa fa-trash-o" />
-      </button>
+        <button
+          type="button"
+          className="btn btn-outline-primary btn-sm"
+          onClick={onToggleDoneClick}
+        >
+          <i className="fa fa-exclamation" />
+        </button>
 
-      <button
-        type="button"
-        className="btn btn-outline-success btn-sm float-right"
-        onClick={onToggleDoneClick}
-      >
-        <i className="fa fa-exclamation" />
-      </button>
+        <button
+          type="button"
+          className="btn btn-outline-danger btn-sm"
+          onClick={onDeleteClick}
+        >
+          <i className="fa fa-trash-o" />
+        </button>
+      </div>
     </span>
   );
 }

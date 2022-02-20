@@ -3,22 +3,17 @@ import React, { useState } from 'react';
 import { AddTodo, SearchTodo, TodoFilters } from '@/features';
 import { FilterType } from '@/features/todo-filters';
 
-import { TodoList, TodoTypes } from '@/entities/todo';
+import {
+  createTodoItem,
+  TodoList,
+  todoModel,
+  todoTypes,
+} from '@/entities/todo';
 import { Header } from './header';
 
 import './styles.css';
 
-let id = 1;
-
-const createTodoItem = (label: string): TodoTypes.TodoItem => ({
-  // eslint-disable-next-line no-plusplus
-  id: id++,
-  label,
-  important: false,
-  done: false,
-});
-
-const getFilteredTodo = (todoList: TodoTypes.TodoList, filterType: string) => {
+const getFilteredTodo = (todoList: todoTypes.TodoList, filterType: string) => {
   switch (filterType) {
     case FilterType.DONE:
       return todoList.filter((todo) => todo.done);
@@ -29,7 +24,7 @@ const getFilteredTodo = (todoList: TodoTypes.TodoList, filterType: string) => {
   }
 };
 
-const getSearchedTodo = (todoList: TodoTypes.TodoList, searchText: string) => {
+const getSearchedTodo = (todoList: todoTypes.TodoList, searchText: string) => {
   if (searchText.length === 0) {
     return todoList;
   }
@@ -39,7 +34,7 @@ const getSearchedTodo = (todoList: TodoTypes.TodoList, searchText: string) => {
     .startsWith(searchText.toLowerCase()));
 };
 
-const toggleProperty = (todoList: TodoTypes.TodoList, id: number, propName: 'important' | 'done') => {
+const toggleProperty = (todoList: todoTypes.TodoList, id: number, propName: 'important' | 'done') => {
   const index = todoList.findIndex((todo) => todo.id === id);
   const oldTodo = todoList[index];
   const newTodo = { ...oldTodo, [propName]: !oldTodo[propName] };
@@ -52,18 +47,13 @@ const toggleProperty = (todoList: TodoTypes.TodoList, id: number, propName: 'imp
 };
 
 export function TodoApp(): JSX.Element {
-  const [todoList, setTodoList] = useState([
-    createTodoItem('Breakfast'),
-    createTodoItem('Drink coffee'),
-    createTodoItem('Learn React'),
-  ]);
-
   const [searchText, setSearchText] = useState('');
-
   const [currentFilter, setCurrentFilter] = useState(FilterType.ALL);
 
+  const todoList = todoModel.selectors.useTodoList();
+
   const handleDeleteClick = (id: number) => {
-    setTodoList(todoList.filter((todoItem) => !(todoItem.id === id)));
+    todoModel.setTodoList(todoList.filter((todoItem) => !(todoItem.id === id)));
   };
 
   const handleSearchChange = (searchText: string) => {
@@ -72,15 +62,15 @@ export function TodoApp(): JSX.Element {
 
   const handleTodoSubmit = (label: string) => {
     const newTodo = createTodoItem(label);
-    setTodoList([...todoList, newTodo]);
+    todoModel.setTodoList([...todoList, newTodo]);
   };
 
   const handleToggleDoneClick = (id: number) => {
-    setTodoList(toggleProperty(todoList, id, 'done'));
+    todoModel.setTodoList(toggleProperty(todoList, id, 'done'));
   };
 
   const handleToggleImportantClick = (id: number) => {
-    setTodoList(toggleProperty(todoList, id, 'important'));
+    todoModel.setTodoList(toggleProperty(todoList, id, 'important'));
   };
 
   const visibleItems = getFilteredTodo(

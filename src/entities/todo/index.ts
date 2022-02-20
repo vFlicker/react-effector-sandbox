@@ -1,3 +1,5 @@
-export * from './ui';
+export { TodoItem, TodoList } from './ui';
 
-export * as TodoTypes from './types';
+export * from './lib';
+export * as todoModel from './model';
+export * as todoTypes from './types';
