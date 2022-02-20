@@ -39,7 +39,7 @@ export function TodoItem({
         <button
           type="button"
           className="btn btn-outline-success btn-sm"
-          onClick={onToggleImportantClick}
+          onClick={onToggleDoneClick}
         >
           <i className="fa fa-check" />
         </button>
@@ -47,7 +47,7 @@ export function TodoItem({
         <button
           type="button"
           className="btn btn-outline-primary btn-sm"
-          onClick={onToggleDoneClick}
+          onClick={onToggleImportantClick}
         >
           <i className="fa fa-exclamation" />
         </button>

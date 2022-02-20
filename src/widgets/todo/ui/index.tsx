@@ -4,7 +4,6 @@ import { AddTodo, SearchTodo, TodoFilters } from '@/features';
 import { FilterType } from '@/features/todo-filters';
 
 import {
-  createTodoItem,
   TodoList,
   todoModel,
   todoTypes,
@@ -34,43 +33,14 @@ const getSearchedTodo = (todoList: todoTypes.TodoList, searchText: string) => {
     .startsWith(searchText.toLowerCase()));
 };
 
-const toggleProperty = (todoList: todoTypes.TodoList, id: number, propName: 'important' | 'done') => {
-  const index = todoList.findIndex((todo) => todo.id === id);
-  const oldTodo = todoList[index];
-  const newTodo = { ...oldTodo, [propName]: !oldTodo[propName] };
-
-  return [
-    ...todoList.slice(0, index),
-    newTodo,
-    ...todoList.slice(index + 1),
-  ];
-};
-
 export function TodoApp(): JSX.Element {
   const [searchText, setSearchText] = useState('');
   const [currentFilter, setCurrentFilter] = useState(FilterType.ALL);
 
   const todoList = todoModel.selectors.useTodoList();
 
-  const handleDeleteClick = (id: number) => {
-    todoModel.setTodoList(todoList.filter((todoItem) => !(todoItem.id === id)));
-  };
-
   const handleSearchChange = (searchText: string) => {
     setSearchText(searchText);
-  };
-
-  const handleTodoSubmit = (label: string) => {
-    const newTodo = createTodoItem(label);
-    todoModel.setTodoList([...todoList, newTodo]);
-  };
-
-  const handleToggleDoneClick = (id: number) => {
-    todoModel.setTodoList(toggleProperty(todoList, id, 'done'));
-  };
-
-  const handleToggleImportantClick = (id: number) => {
-    todoModel.setTodoList(toggleProperty(todoList, id, 'important'));
   };
 
   const visibleItems = getFilteredTodo(
@@ -91,13 +61,8 @@ export function TodoApp(): JSX.Element {
           filter={currentFilter}
         />
       </div>
-      <TodoList
-        todoList={visibleItems}
-        onDeleteClick={() => handleDeleteClick}
-        onToggleDoneClick={() => handleToggleDoneClick}
-        onToggleImportantClick={() => handleToggleImportantClick}
-      />
-      <AddTodo onTodoSubmit={handleTodoSubmit} />
+      <TodoList todoList={visibleItems} />
+      <AddTodo />
     </div>
   );
 }

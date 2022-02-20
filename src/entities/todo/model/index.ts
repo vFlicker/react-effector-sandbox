@@ -1,4 +1,4 @@
-import { createEvent, restore } from 'effector';
+import { createEvent, createStore } from 'effector-logger';
 import { useStore } from 'effector-react';
 
 import { createTodoItem } from '../lib';
@@ -10,9 +10,31 @@ const initialState = [
   createTodoItem('Learn React'),
 ];
 
-export const setTodoList = createEvent<TodoList>();
+const toggleProperty = (todoList: TodoList, id: number, propName: 'important' | 'done') => {
+  const index = todoList.findIndex((todo) => todo.id === id);
+  const oldTodo = todoList[index];
+  const newTodo = { ...oldTodo, [propName]: !oldTodo[propName] };
 
-const $todoList = restore<TodoList>(setTodoList, initialState);
+  return [
+    ...todoList.slice(0, index),
+    newTodo,
+    ...todoList.slice(index + 1),
+  ];
+};
+
+export const addTask = createEvent<string>();
+export const toggleDoneTask = createEvent<number>();
+export const toggleImportantTask = createEvent<number>();
+export const deleteTask = createEvent<number>();
+
+const $todoList = createStore<TodoList>(initialState)
+  .on(addTask, (todoList, label) => {
+    const newTodo = createTodoItem(label);
+    return [...todoList, newTodo];
+  })
+  .on(toggleDoneTask, (todoList, id) => toggleProperty(todoList, id, 'done'))
+  .on(toggleImportantTask, (todoList, id) => toggleProperty(todoList, id, 'important'))
+  .on(deleteTask, (todoList, id) => todoList.filter((todoItem) => !(todoItem.id === id)));
 
 export const selectors = {
   useTodoList: () => useStore($todoList),

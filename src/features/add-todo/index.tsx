@@ -1,17 +1,16 @@
 import React, { ChangeEvent, useState } from 'react';
+
+import { todoModel } from '@/entities/todo';
+
 import './styles.css';
 
-type AddTodoProps = {
-  onTodoSubmit: (label: string) => void
-}
-
-export function AddTodo({ onTodoSubmit }: AddTodoProps): JSX.Element {
+export function AddTodo(): JSX.Element {
   const [label, setLabel] = useState('');
 
   const handleSubmit = (evt: ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    onTodoSubmit(label);
+    todoModel.addTask(label);
     setLabel('');
   };
 
