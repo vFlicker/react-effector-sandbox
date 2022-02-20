@@ -5,6 +5,7 @@
     "@babel/preset-typescript"
   ],
   "plugins": [
-    ["@babel/plugin-transform-runtime", { "regenerator": true }]
+    ["@babel/plugin-transform-runtime", { "regenerator": true }],
+    "effector-logger/babel-plugin", { "inspector": true }
   ]
 }

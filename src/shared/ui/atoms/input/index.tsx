@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 
-export function Input(): JSX.Element {
+type InputProps = {
+  label: string
+} & InputHTMLAttributes<HTMLInputElement>
+
+export function Input(props: InputProps): JSX.Element {
   return (
-    <input className="input" type="text" />
+    <input className="input" type="text" {...props} />
   );
 }

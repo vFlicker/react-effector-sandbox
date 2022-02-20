@@ -1,10 +1,9 @@
 import React from 'react';
-import { Input } from '@/shared/ui';
 
-export function App(): JSX.Element {
+import { TodoApp } from '@/widgets/todo';
+
+export function App() {
   return (
-    <form>
-      <Input />
-    </form>
+    <TodoApp />
   );
 }

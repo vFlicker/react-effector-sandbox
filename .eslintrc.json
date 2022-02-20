@@ -38,14 +38,15 @@
       "ts": "never",
       "tsx": "never"
     }],
+    "import/prefer-default-export": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "jsx-a11y/no-noninteractive-tabindex": "off",
     "no-console": "off",
     "no-shadow": "off",
     "no-use-before-define": "off",
-    "import/prefer-default-export": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off",
     "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }]
   }
 }
