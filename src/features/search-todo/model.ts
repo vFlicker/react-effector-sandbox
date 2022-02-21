@@ -17,7 +17,7 @@ export const setSearchText = createEvent<string>();
 
 const $searchText = restore(setSearchText, '');
 
-const $searchedTodo = combine(todoModel.$todoList, $searchText, (todoList, searchText) => (
+export const $searchedTodo = combine(todoModel.$todoList, $searchText, (todoList, searchText) => (
   getSearchedTodo(todoList, searchText)
 ));
 
