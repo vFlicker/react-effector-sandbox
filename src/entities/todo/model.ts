@@ -1,8 +1,8 @@
 import { createEvent, createStore } from 'effector-logger';
 import { useStore } from 'effector-react';
 
-import { createTodoItem } from '../lib';
-import { TodoList } from '../types';
+import { createTodoItem } from './lib';
+import { TodoList } from './types';
 
 const initialState = [
   createTodoItem('Breakfast'),
@@ -27,7 +27,7 @@ export const toggleDoneTask = createEvent<number>();
 export const toggleImportantTask = createEvent<number>();
 export const deleteTask = createEvent<number>();
 
-const $todoList = createStore<TodoList>(initialState)
+export const $todoList = createStore<TodoList>(initialState)
   .on(addTask, (todoList, label) => {
     const newTodo = createTodoItem(label);
     return [...todoList, newTodo];

@@ -1,16 +1,15 @@
 import React, { ChangeEvent, useState } from 'react';
+
+import { searchTodoModel } from '..';
+
 import './styles.css';
 
-type SearchTodoProps = {
-  onSearchChange: (searchText: string) => void
-}
-
-export function SearchTodo({ onSearchChange }: SearchTodoProps): JSX.Element {
+export function SearchTodo(): JSX.Element {
   const [searchText, setSearchText] = useState('');
 
   const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setSearchText(evt.target.value);
-    onSearchChange(searchText);
+    searchTodoModel.setSearchText(searchText);
   };
 
   return (
